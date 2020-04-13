@@ -7,12 +7,15 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+
+import Router from './router';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text> App Screen </Text>
-    </View>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 }
 
