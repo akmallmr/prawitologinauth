@@ -37,7 +37,7 @@ const Register = ({navigation}) => {
     <KeyboardAvoidingView
       style={{flex: 1}}
       behavior="height"
-      keyboardVerticalOffset={Platform.select({ios: 0, android: 25})}>
+      keyboardVerticalOffset={Platform.select({ios: 0, android: -100})}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.wrapper}>
           <TouchableOpacity
