@@ -10,7 +10,8 @@ import {
 import {Input, Button} from '../../components';
 import {colors} from '../../utils';
 import {IconBack, RegisterIllustation} from '../../assets';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {setForm} from '../../redux';
 
 const Register = ({navigation}) => {
   const backHandler = () => {
@@ -18,26 +19,22 @@ const Register = ({navigation}) => {
   };
 
   const RegisterReducer = useSelector(state => state.RegisterReducer);
+  //RegisterReducer bisa didestructuring, menjadi {from} saja. Karena dari ketiga value pada reducer.js, initialStateRegister, yang dipakai hanya form saja.
+  const dispatch = useDispatch();
 
-  const [form, setForm] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-  });
+  //   const [form, setForm] = useState({
+  //     fullName: '',
+  //     email: '',
+  //     password: '',
+  //   });
 
-  useEffect(() => {
-    console.log('global', RegisterReducer);
-  }, [RegisterReducer]);
-
-  const onInputChange = (value, input) => {
-    setForm({
-      ...form,
-      [input]: value,
-    });
+  const onInputChange = (value, inputType) => {
+    //type di dalam object dispact wajib ada..
+    dispatch(setForm(inputType, value));
   };
 
   const sendData = () => {
-    console.log('Kirim data Register..', form);
+    console.log('Kirim data Register..', RegisterReducer.form);
   };
 
   return (
@@ -64,19 +61,19 @@ const Register = ({navigation}) => {
           <View style={styles.space(64)} />
           <Input
             placeholder="Nama Lengkap"
-            value={form.fullName}
+            value={RegisterReducer.form.fullName}
             onChangeText={value => onInputChange(value, 'fullName')}
           />
           <View style={styles.space(33)} />
           <Input
             placeholder="Email"
-            value={form.email}
+            value={RegisterReducer.form.email}
             onChangeText={value => onInputChange(value, 'email')}
           />
           <View style={styles.space(33)} />
           <Input
             placeholder="Password"
-            value={form.password}
+            value={RegisterReducer.form.password}
             secureTextEntry={true}
             onChangeText={value => onInputChange(value, 'password')}
           />
