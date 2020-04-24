@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,17 +10,24 @@ import {
 import {Input, Button} from '../../components';
 import {colors} from '../../utils';
 import {IconBack, RegisterIllustation} from '../../assets';
+import {useSelector} from 'react-redux';
 
 const Register = ({navigation}) => {
   const backHandler = () => {
     navigation.goBack();
   };
 
+  const RegisterReducer = useSelector(state => state.RegisterReducer);
+
   const [form, setForm] = useState({
     fullName: '',
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    console.log('global', RegisterReducer);
+  }, [RegisterReducer]);
 
   const onInputChange = (value, input) => {
     setForm({
