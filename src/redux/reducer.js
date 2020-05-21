@@ -1,9 +1,5 @@
 import {combineReducers} from 'redux';
 
-const initialState = {
-  name: 'Akmal Maula Rasyid',
-};
-
 const initialStateRegister = {
   form: {
     fullName: '',
@@ -15,6 +11,10 @@ const initialStateRegister = {
 };
 
 const initialStateLogin = {
+  login: {
+    email: '',
+    password: '',
+  },
   info: 'Tolong masukan password anda',
   isLogin: true,
 };
@@ -39,6 +39,15 @@ const RegisterReducer = (state = initialStateRegister, action) => {
 };
 
 const LoginReducer = (state = initialStateLogin, action) => {
+  if (action.type === 'SET_LOGIN') {
+    return {
+      ...state,
+      login: {
+        ...state.login,
+        [action.inputType]: action.inputValue,
+      },
+    };
+  }
   return state;
 };
 

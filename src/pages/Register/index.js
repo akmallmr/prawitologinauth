@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,27 +9,20 @@ import {
 
 import {Input, Button} from '../../components';
 import {colors} from '../../utils';
-import {IconBack, RegisterIllustation} from '../../assets';
+import {IconBack, RegisterIllustration} from '../../assets';
 import {useSelector, useDispatch} from 'react-redux';
 import {setForm} from '../../redux';
 
 const Register = ({navigation}) => {
-  const backHandler = () => {
+  const handleBack = () => {
     navigation.goBack();
   };
 
   const RegisterReducer = useSelector(state => state.RegisterReducer);
   //RegisterReducer bisa didestructuring, menjadi {from} saja. Karena dari ketiga value pada reducer.js, initialStateRegister, yang dipakai hanya form saja.
   const dispatch = useDispatch();
-
-  //   const [form, setForm] = useState({
-  //     fullName: '',
-  //     email: '',
-  //     password: '',
-  //   });
-
   const onInputChange = (value, inputType) => {
-    //type di dalam object dispact wajib ada..
+    //type di dalam object dispatch wajib ada.. Biasanya di action creator..
     dispatch(setForm(inputType, value));
   };
 
@@ -44,13 +37,8 @@ const Register = ({navigation}) => {
       keyboardVerticalOffset={Platform.select({ios: 0, android: -100})}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.wrapper}>
-          <TouchableOpacity
-            style={{flexDirection: 'row'}}
-            onPress={() => backHandler()}>
-            <IconBack width={15} height={15} style={{alignSelf: 'center'}} />
-            <Text style={{alignSelf: 'center'}}>Back</Text>
-          </TouchableOpacity>
-          <RegisterIllustation
+          <Button type="icon" name="back" onPress={() => handleBack()} />
+          <RegisterIllustration
             width={106}
             height={115}
             style={styles.illustration}
